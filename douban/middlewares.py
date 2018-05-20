@@ -6,14 +6,16 @@
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-import random
 from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+import random
+import sys, os
 
 class RandomUserAgentMiddle(UserAgentMiddleware):
     def __init__(self, settings, user_agent='Scrapy'):
         super(RandomUserAgentMiddle, self).__init__()
         self.user_agent = user_agent
         user_agent_list_file = settings.get('USER_AGENT_LIST')
+        user_agent_list_file = os.path.abspath(os.path.join(os.path.dirname(__file__), user_agent_list_file))
         if not user_agent_list_file:
             ua = settings.get('USER_AGENT', user_agent)
             self.user_agent_list = [ua]

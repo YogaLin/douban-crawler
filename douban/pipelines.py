@@ -6,9 +6,10 @@
 """
 
 from scrapy.exporters import CsvItemExporter
+import os
 
 class DoubanPipeline(object):
-    item_types = ['user', 'movie']
+    item_types = ['user', 'douban']
 
     def get_item_name(self, item):
         """ convert 'UserItem' from to 'user' """
@@ -16,7 +17,8 @@ class DoubanPipeline(object):
 
     def open_spider(self, spider):
         CSV_DIR = spider.settings.get('CSV_DIR')
-        self.files = dict([ (name, open(CSV_DIR + name + '.csv', 'w+b')) for name in self.item_types ])
+        CSV_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), CSV_DIR))
+        self.files = dict([ (name, open(CSV_DIR + '/' + name + '.csv', 'w+b')) for name in self.item_types ])
         self.exporters = dict([ (name, CsvItemExporter(self.files[name])) for name in self.item_types ])
         [e.start_exporting() for e in self.exporters.values()]
 

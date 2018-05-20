@@ -1,0 +1,3 @@
+*.pyc
+douban/results/*
+*DS_Store
