@@ -1,9 +1,14 @@
-# -*- coding: utf-8 -*-
-"""
-    crawl douban user
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
 
-    Yoga Lin | 2017/10/29 10:24
-"""
+# **********************************************************
+# * Author        : Yoga Lin
+# * Email         : lsyoga@foxmail.com
+# * Create time   : 2018-05-21 00:07
+# * Last modified : 2018-05-21 00:07
+# * Filename      : douban.py
+# * Description   : 
+# **********************************************************
 
 import scrapy
 import sys
@@ -11,12 +16,12 @@ import re
 import random
 
 from douban.items import UserItem
-from douban.items import MovieItem
+# from douban.items import DoubanItem
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-class DoubanSpiderSpider(scrapy.Spider):
+class DoubanSpider(scrapy.Spider):
     name = 'douban_spider'
     # start_users_id = ['121253425', 'staymiao', '137816276', 'bibibbbi', '72452043', '5580906', '88584584']
     start_users_id = ['121253425']
